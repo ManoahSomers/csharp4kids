@@ -340,156 +340,334 @@ Een methode gebruik je om een taak op te schrijven die je vaker wilt doen. Zo ku
 
 ## Deel 2: Geavanceerde Concepten
 
+Nu we de basis concepten hebben behandeld en een beetje bekend zijn hoe we het kunnen gebruiken, kunnen we door naar de geavanceerdere concepten. 
+
 ### Klassen en Objecten
+Stel je voor dat je een game maakt waarin je een eigen avatar hebt. Een class in C# is eigenlijk de bouwtekening of het recept voor zo’n avatar. In een class schrijf je op welke eigenschappen jouw avatar heeft (zoals naam, kracht, gezondheid) en wat hij allemaal kan doen (zoals springen, lopen of dansen).
+
+**Waarom is een class handig?**
+- Je hoeft maar één keer op te schrijven hoe een avatar werkt.
+- Daarna kun je in je game net zoveel avatars maken als je wilt, allemaal volgens dezelfde bouwtekening.
+- Elke avatar die je maakt met de class, noemen we een object.
+
+Voorbeeld:
+Hieronder zie je hoe je een class voor een avatar zou kunnen maken in C#:
 
 ```csharp
-class Persoon
+class Avatar
 {
-    public string naam;
-    public int leeftijd;
+    public string Naam;
+    public int Gezondheid;
+    public int Kracht;
 
-    public void StelJeVoor()
+    public void Springen()
     {
-        Console.WriteLine("Hallo, ik ben " + naam + " en ik ben " + leeftijd + " jaar oud.");
+        Console.WriteLine(Naam + " springt!");
+    }
+
+    public void Dansen()
+    {
+        Console.WriteLine(Naam + " doet een dansje!");
     }
 }
 ```
+Met deze bouwtekening kun je nu echte avatars maken in je game:
+
+```csharp
+Avatar speler1 = new Avatar();
+speler1.Naam = "SuperSanne";
+speler1.Gezondheid = 100;
+speler1.Kracht = 50;
+
+speler1.Springen(); // Laat zien: SuperSanne springt!
+speler1.Dansen();   // Laat zien: SuperSanne doet een dansje!
+```
+Kort samengevat
+Een class is de bouwtekening voor iets in je game, zoals een avatar.
+
+Je schrijft op wat je avatar allemaal heeft en kan doen.
+
+Daarna kun je met die bouwtekening zoveel avatars maken als je wilt, elk met hun eigen naam en eigenschappen.
+
+Zo kun je in je game makkelijk veel verschillende avatars maken, zonder alles steeds opnieuw te hoeven schrijven!
 
 ---
 
 ### Constructors
 
-```csharp
-class Student
-{
-    public string naam;
-    public int leeftijd;
+Stel je voor dat je in een game een avatar wilt maken, bijvoorbeeld een held met een naam, gezondheid en kracht. Een constructor in C# is een speciaal stukje code in een class dat automatisch wordt uitgevoerd als je een nieuwe avatar maakt. Je gebruikt een constructor om meteen alle belangrijke eigenschappen van je avatar in te stellen, zodat hij direct klaar is om te spelen.
 
-    public Student(string n, int l)
+Denk aan een constructor als een soort “startknop” of “maak-af”-machine voor je avatar. Zodra je een nieuwe avatar maakt, zorgt de constructor ervoor dat je avatar meteen een naam, gezondheid en kracht krijgt.
+
+Voorbeeld
+```csharp
+class Avatar
+{
+    public string Naam;
+    public int Gezondheid;
+    public int Kracht;
+
+    // Dit is de constructor!
+    public Avatar(string naam, int gezondheid, int kracht)
     {
-        naam = n;
-        leeftijd = l;
+        Naam = naam;
+        Gezondheid = gezondheid;
+        Kracht = kracht;
     }
 }
 ```
+Nu kun je in je game supersnel een nieuwe avatar maken en meteen alles instellen:
+
+```csharp
+Avatar speler1 = new Avatar("SuperSanne", 100, 50);
+// speler1 heeft nu direct de naam "SuperSanne", gezondheid 100 en kracht 50
+```
+**Waarom is een constructor handig?**
+- Je hoeft niet alles één voor één in te stellen na het maken van je avatar.
+- Je weet zeker dat je avatar altijd een naam, gezondheid en kracht heeft als je hem maakt.
+- Het bespaart tijd en voorkomt fouten in je code.
+
+**Kortom:**
+Een constructor gebruik je in C# om ervoor te zorgen dat alles wat belangrijk is voor jouw avatar (of ander object) meteen goed wordt ingesteld als je hem maakt. Zo is je avatar direct klaar om te spelen!
 
 ---
 
 ### Properties
+Stel je voor dat je in je game een avatar hebt, bijvoorbeeld een held die een naam, gezondheid en kracht heeft. Je wilt ervoor zorgen dat je deze eigenschappen makkelijk kunt bekijken en aanpassen, maar ook dat je soms regels kunt instellen (bijvoorbeeld: gezondheid mag niet lager dan 0 worden). In C# gebruik je daarvoor een property.
 
+Een property is een slimme manier om informatie (zoals de naam of gezondheid) van je avatar op te slaan en te beheren. Het lijkt op een variabele, maar je kunt er extra regels aan toevoegen. Met properties kun je bepalen wat er gebeurt als iemand de waarde wil lezen (get) of veranderen (set).
+
+**Waarom is een property handig?**
+Je kunt makkelijk de waarde van een eigenschap bekijken of aanpassen.
+Je kunt regels toevoegen, zoals: "Gezondheid mag niet onder de 0 komen."
+Je kunt sommige eigenschappen alleen-lezen maken (je mag ze wel zien, maar niet veranderen).
+
+Voorbeeld: Avatar met properties
 ```csharp
-private string _naam;
-public string Naam
+class Avatar
 {
-    get { return _naam; }
-    set { _naam = value; }
+    private int gezondheid; // Dit is het geheime vakje (field)
+
+    // Dit is de property voor Gezondheid
+    public int Gezondheid
+    {
+        get { return gezondheid; } // Hiermee kun je de waarde lezen
+        set
+        {
+            if (value < 0)
+                gezondheid = 0;    // Gezondheid mag niet lager dan 0
+            else
+                gezondheid = value;
+        }
+    }
+
+    public string Naam { get; set; } // Simpele property zonder extra regels
 }
 ```
+Nu kun je in je game makkelijk de naam en gezondheid van je avatar instellen en opvragen:
+
+```csharp
+Avatar speler = new Avatar();
+speler.Naam = "SuperSanne";
+speler.Gezondheid = 100;
+Console.WriteLine(speler.Naam + " heeft " + speler.Gezondheid + " gezondheidspunten.");
+
+speler.Gezondheid = -10; // Wordt automatisch 0 door de property-regel!
+Console.WriteLine(speler.Naam + " heeft nu " + speler.Gezondheid + " gezondheidspunten.");
+```
+**Kort samengevat**
+Een property gebruik je om eigenschappen van je avatar netjes te beheren.
+Je kunt makkelijk lezen en aanpassen wat je avatar kan en mag.
+Je kunt extra regels toevoegen, zodat je game eerlijk blijft en er geen gekke dingen gebeuren (zoals negatieve gezondheid).
+
+Zo zorg je ervoor dat jouw avatar in de game altijd goed werkt en zich aan de regels houdt!
 
 ---
 
 ### Overerving (Inheritance)
+Stel je voor dat je een game maakt met verschillende soorten avatars, zoals een gewone speler, een tovenaar en een ridder. Al deze avatars hebben dingen die ze allemaal kunnen, zoals lopen, springen en een naam hebben. Maar sommige avatars kunnen ook iets extra’s, zoals toveren of met een zwaard vechten.
 
+Overerving in C# is een manier om één keer op te schrijven wat alle avatars gemeen hebben, en daarna voor elk speciaal soort avatar alleen de extra dingen toe te voegen die uniek zijn.
+
+**Waarom is overerving handig?**
+- Je hoeft niet steeds opnieuw dezelfde code te schrijven voor elke soort avatar.
+- Je kunt makkelijk nieuwe soorten avatars maken die automatisch alles kunnen wat een gewone avatar ook kan.
+- Je houdt je code netjes en overzichtelijk.
+
+Voorbeeld: Avatars in een Game
+***1. De basis-avatar (de "bouwtekening")***
 ```csharp
-class Voertuig
+class Avatar
 {
-    public string merk;
-    public void ToonInfo() { /* ... */ }
-}
+    public string Naam;
+    public int Gezondheid;
 
-class Auto : Voertuig
-{
-    public int aantalDeuren;
+    public void Lopen()
+    {
+        Console.WriteLine(Naam + " loopt.");
+    }
+
+    public void Springen()
+    {
+        Console.WriteLine(Naam + " springt.");
+    }
 }
 ```
+Deze class is de bouwtekening voor alle avatars. Elke avatar kan lopen en springen en heeft een naam en gezondheid.
 
----
-
-### Polymorfisme
+***2. Een speciale avatar: de Tovenaar***
+Nu wil je een tovenaar maken die alles kan wat een gewone avatar kan, maar ook kan toveren. Met overerving doe je dat zo:
 
 ```csharp
-class Dier
+class Tovenaar : Avatar
 {
-    public virtual void MaakGeluid() { Console.WriteLine("Dier geluid"); }
-}
-
-class Hond : Dier
-{
-    public override void MaakGeluid() { Console.WriteLine("Waf waf!"); }
+    public void Toveren()
+    {
+        Console.WriteLine(Naam + " doet een magische spreuk!");
+    }
 }
 ```
+Hier staat : Avatar achter de classnaam. Dat betekent dat de Tovenaar alles erft van Avatar: hij kan lopen, springen, heeft een naam en gezondheid, én kan nu ook toveren.
+
+***3. Een andere speciale avatar: de Ridder***
+```csharp
+class Ridder : Avatar
+{
+    public void Zwaardslaan()
+    {
+        Console.WriteLine(Naam + " slaat met zijn zwaard!");
+    }
+}
+```
+Ook de Ridder erft alles van Avatar, maar kan daarnaast met een zwaard slaan.
+
+Hoe gebruik je het in je game?
+```csharp
+Tovenaar speler1 = new Tovenaar();
+speler1.Naam = "Magische Max";
+speler1.Lopen();      // Magische Max loopt.
+speler1.Toveren();    // Magische Max doet een magische spreuk!
+
+Ridder speler2 = new Ridder();
+speler2.Naam = "Ridder Sam";
+speler2.Springen();   // Ridder Sam springt.
+speler2.Zwaardslaan();// Ridder Sam slaat met zijn zwaard!
+```
+Beide avatars kunnen alles wat een gewone avatar kan, maar hebben ook hun eigen speciale krachten.
+
+**Kort samengevat**
+- Overerving gebruik je om één keer op te schrijven wat alle avatars kunnen.
+- Daarna maak je speciale soorten avatars die alles van de basis-avatar krijgen, plus hun eigen extra’s.
+- Zo kun je makkelijk en snel veel verschillende soorten avatars maken in je game, zonder steeds opnieuw te beginnen.
 
 ---
 
 ### Interfaces
 
-```csharp
-interface IBeweegbaar
-{
-    void Beweeg();
-}
+Stel je voor dat je een game maakt met verschillende soorten avatars, zoals een ridder, een tovenaar en een robot. Al deze avatars kunnen misschien dingen als springen, aanvallen of praten. 
+Een interface in C# is een soort lijstje met afspraken: “Als je een avatar bent, moet je deze dingen kunnen doen!”
 
-class Auto : IBeweegbaar
-{
-    public void Beweeg() { Console.WriteLine("De auto rijdt"); }
-}
-```
----
+**Waarom is een interface handig?**
+- Je kunt aan de computer vertellen: “Iedere avatar moet kunnen springen en aanvallen.”
+- Je kunt verschillende soorten avatars maken (bijvoorbeeld een ridder en een robot), maar ze moeten zich allemaal aan dezelfde afspraken houden.
+- Je kunt makkelijk een lijst maken van allemaal verschillende avatars en ze allemaal laten springen, zonder dat je hoeft te weten wat voor soort avatar het precies is.
 
-### Abstracte Klassen
+Voorbeeld: Een interface voor een avatar
+Stel, je maakt een interface die zegt dat elke avatar moet kunnen springen en aanvallen:
 
 ```csharp
-abstract class Vorm
+interface Avatar
 {
-    public abstract double BerekenOppervlakte();
-}
-class Cirkel : Vorm
-{
-    public double Straal;
-    public override double BerekenOppervlakte() => Math.PI * Straal * Straal;
+    void Springen();
+    void Aanvallen();
 }
 ```
+Nu maak je verschillende soorten avatars die zich aan deze afspraken houden:
+
+```csharp
+class Ridder : Avatar
+{
+    public void Springen()
+    {
+        Console.WriteLine("De ridder springt over een muur!");
+    }
+    public void Aanvallen()
+    {
+        Console.WriteLine("De ridder zwaait met zijn zwaard!");
+    }
+}
+
+class Robot : IAvatarActies
+{
+    public void Springen()
+    {
+        Console.WriteLine("De robot maakt een hoge sprong met zijn raketten!");
+    }
+    public void Aanvallen()
+    {
+        Console.WriteLine("De robot schiet met een laser!");
+    }
+}
+```
+Nu kun je in je game een lijst maken van verschillende avatars en ze allemaal laten springen of aanvallen, zonder dat je hoeft te weten of het een ridder of een robot is:
+
+```csharp
+List<IAvatarActies> avatars = new List<IAvatarActies>();
+avatars.Add(new Ridder());
+avatars.Add(new Robot());
+
+foreach (IAvatarActies avatar in avatars)
+{
+    avatar.Springen();
+    avatar.Aanvallen();
+}
+```
+**Kort samengevat**
+- Een interface is een lijstje met afspraken waar je avatar zich aan moet houden.
+- Je gebruikt een interface om te zorgen dat verschillende soorten avatars allemaal dezelfde dingen kunnen doen, zoals springen of aanvallen.
+- Zo kun je makkelijk met allerlei verschillende avatars werken in je game, zonder dat je voor elke soort aparte code hoeft te schrijven!
+
+***Met een interface spreek je dus af: “Iedereen die een avatar wil zijn, moet kunnen springen en aanvallen”***
+
 ---
 
-### Exceptie Handling
+### Extra: Exceptie Handling
+
+Je gebruikt exception handling in C# om ervoor te zorgen dat je programma niet stopt of crasht als er iets onverwachts misgaat, zoals een fout die je niet had voorzien. 
+Stel je voor: je avatar wil een drankje drinken, maar het flesje is leeg. In plaats van dat het hele spel stopt of een rare foutmelding geeft, kun je met exception handling de fout netjes opvangen en bijvoorbeeld een berichtje laten zien: “Er is geen drankje meer!”
+
+**Waarom is exception handling handig?**
+- Je programma blijft gewoon doorgaan, zelfs als er iets fout gaat.
+- Je kunt de gebruiker een duidelijke, vriendelijke boodschap geven in plaats van een moeilijke foutmelding.
+- Je kunt zelf bepalen wat er gebeurt bij een fout, bijvoorbeeld iets anders proberen of uitleg geven.
+
+**Voorbeeld met een avatar en verkeerde input**
+Stel je voor: je maakt een game waarin de speler een getal moet invullen om te bepalen hoeveel stappen zijn avatar zet. Maar soms typt de speler per ongeluk een woord in plaats van een getal, of een getal dat niet mag. Zonder exception handling zou je programma stoppen en een fout tonen.
+
+Met exception handling kun je dit zo oplossen:
 
 ```csharp
 try
 {
-    int getal = int.Parse(Console.ReadLine());
+    Console.Write("Hoeveel stappen moet jouw avatar zetten? ");
+    int stappen = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("Je avatar zet " + stappen + " stappen vooruit!");
 }
 catch (FormatException)
 {
-    Console.WriteLine("Geen geldig getal!");
+    Console.WriteLine("Oeps! Je moet een getal invullen, geen woord. Probeer het opnieuw.");
 }
 ```
+In het try-blok probeer je de invoer van de speler om te zetten naar een getal.
+Als de speler iets verkeerds invult (bijvoorbeeld "hond" in plaats van "5"), ontstaat er een fout (exception).
+In het catch-blok vang je die fout op en laat je een duidelijk bericht zien, zodat de speler het opnieuw kan proberen zonder dat het spel stopt.
 
----
+**Kort samengevat**
+- Exception handling zorgt ervoor dat je programma niet zomaar stopt als er iets fout gaat.
+- Je kunt netjes uitleggen wat er mis is, zodat de gebruiker niet schrikt van een foutmelding.
+- Het maakt je programma betrouwbaarder en fijner om te gebruiken, ook als er onverwachte dingen gebeuren.
 
-### Delegates en Events
-
-```csharp
-delegate void BoodschapHandler(string boodschap);
-BoodschapHandler handler = ToonBoodschap;
-handler("Hallo via delegate!");
-```
-
----
-
-### Lambda-Expressies
-
-```csharp
-Func<int, int, int> tel_op = (x, y) => x + y;
-Console.WriteLine(tel_op(5, 3));
-```
-
----
-
-### LINQ
-
-```csharp
-var ouderen = personen.Where(p => p.Leeftijd > 30).OrderBy(p => p.Naam);
-```
+***Zo blijft je programma altijd netjes werken, zelfs als je avatar een keer pech heeft!***
 
 ---
 
