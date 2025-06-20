@@ -11,7 +11,7 @@ C\# is krachtig én eenvoudig, waardoor het ideaal is voor beginners en gevorder
 
 ### Studio Code 
 
-Ga in je webbrowser naar: [workspaceXX.somers.enterprises/folder=/workspace](https://workspaceXX.somers.enterprises/folder=/workspace) 
+Ga in je webbrowser naar: [workspaceXX.somers.enterprises/?folder=/workspace](https://workspaceXX.somers.enterprises/?folder=/workspace) 
 Vervang de XX in de link door een getal (01 t/m 20).
 
 **Let op!**
