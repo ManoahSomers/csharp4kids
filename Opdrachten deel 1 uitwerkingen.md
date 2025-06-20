@@ -1,13 +1,7 @@
-# Opdrachten per Concept (Met Uitwerking)
+# Opdrachten per Concept de uitwerkingen
 
-Hieronder vind je voor elk basisconcept een eenvoudige opdracht waarmee je zelf kunt oefenen. 
-Bij elke opdracht staat direct de uitwerking (de code en een uitleg).
+Hieronder vind je voor elke opdracht een voorbeeld uitwerking! 
 
-Tip:
-Gebruik dit stuk code om de computer tekst uit te laten printen.
- ```csharp
-Console.WriteLine('TEKST');
-```
 ---
 
 ## 1. Variabelen en Datatypes
