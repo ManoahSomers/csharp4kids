@@ -9,9 +9,30 @@ C\# is krachtig én eenvoudig, waardoor het ideaal is voor beginners en gevorder
 
 ## Je ontwikkelomgeving Instellen
 
-### Visual Studio Code 
+### Studio Code 
 
-TODO in de webbrowser
+Ga in je webbrowser naar: [workspaceXX.somers.enterprises/folder=/workspace](https://workspaceXX.somers.enterprises/folder=/workspace) 
+Vervang de XX in de link door een getal (01 t/m 20).
+
+**Let op!**
+Zorg ervoor dat je een nummer kiest waar niemand anders op zit!
+
+Vul het geheime wachtwoord in 😲.
+
+### Het uitvoeren van de opdrachten
+Voor iedere opdracht is er een apart project. 
+![alt text](image-1.png)
+
+Vouw de map van de opdracht die je wilt uitvoeren open en klik op 'program.cs'. 
+In dit bestand staat de code.
+![alt text](image-2.png)
+
+Wanneer je wilt testen of wat je hebt gedaan ook werkt moet je het volgende doen:
+1. Klik met je rechtermuisknop op het .csproj bestand.
+2. Klik op 'Run .NET Core project'.
+![alt text](image.png)
+3. Vervolgens zie je onderin het resultaat van het pragramma:
+![alt text](image-3.png)
 
 ---
 
