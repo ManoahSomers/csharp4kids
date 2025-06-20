@@ -576,7 +576,7 @@ Voorbeeld: Een interface voor een avatar
 Stel, je maakt een interface die zegt dat elke avatar moet kunnen springen en aanvallen:
 
 ```csharp
-interface Avatar
+interface IAvatar
 {
     void Springen();
     void Aanvallen();
@@ -585,7 +585,7 @@ interface Avatar
 Nu maak je verschillende soorten avatars die zich aan deze afspraken houden:
 
 ```csharp
-class Ridder : Avatar
+class Ridder : IAvatar
 {
     public void Springen()
     {
@@ -597,7 +597,7 @@ class Ridder : Avatar
     }
 }
 
-class Robot : IAvatarActies
+class Robot : IAvatar
 {
     public void Springen()
     {
@@ -612,11 +612,11 @@ class Robot : IAvatarActies
 Nu kun je in je game een lijst maken van verschillende avatars en ze allemaal laten springen of aanvallen, zonder dat je hoeft te weten of het een ridder of een robot is:
 
 ```csharp
-List<IAvatarActies> avatars = new List<IAvatarActies>();
+List<IAvatar> avatars = new List<IAvatar>();
 avatars.Add(new Ridder());
 avatars.Add(new Robot());
 
-foreach (IAvatarActies avatar in avatars)
+foreach (IAvatar avatar in avatars)
 {
     avatar.Springen();
     avatar.Aanvallen();
