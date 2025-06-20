@@ -29,7 +29,7 @@ string naam = "";
 int leeftijd = ;
 string dier = "";
 
-Console.WriteLine(""+...+""+...+""+...+"")
+Console.WriteLine(""+...+""+...+""+...+"");
 ```
 ---
 
@@ -45,7 +45,7 @@ Laat de computer twee getallen optellen, aftrekken, vermenigvuldigen en delen. L
 int getal1 = ;
 int getal2 = ;
 
-Console.WriteLine(...)
+Console.WriteLine(...);
 ```
 
 ---
@@ -149,7 +149,7 @@ Maak een array met drie favoriete fruitsoorten en print ze allemaal op het scher
 ```csharp
 string[] fruit = { "", "", "" };
 
-for (int i = 0; i < fruit[i]; i++)
+for (int i = 0; i < fruit.Length; i++)
 {
 }
 ```
